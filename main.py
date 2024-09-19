@@ -72,3 +72,88 @@ update.message.reply_text(f"Task added for {task_time.strftime('%d-%m-%Y %H:%M:%
     except (IndexError, ValueError) as e:
         logging.error(f"Error in /add command: {e}")
         update.message.reply_text("Usage: /add <date> <time> <description>")
+
+
+# Function to handle the /complete command
+def complete(update: Update, context: CallbackContext) -> None:
+   try:
+       task_id = int(context.args[0])
+       user_id = update.message.from_user.id
+       tasks = get_tasks(user_id)
+       task_found = False
+       for task in tasks:
+           if task['id'] == task_id:
+               task['status'] = 'Completed'
+               task_found = True
+               break
+       if task_found:
+           update.message.reply_text(f"Task {task_id} marked as complete.")
+       else:
+           update.message.reply_text("Task not found.")
+   except (IndexError, ValueError):
+       update.message.reply_text("Usage: /complete <task_id>")
+
+# Function to handle the /view command
+def view(update: Update, context: CallbackContext) -> None:
+   user_id = update.message.from_user.id
+   tasks = get_tasks(user_id)
+   if tasks:
+       response = '\n'.join(
+           [f"Task ID: {task['id']} - {task['task_time']} - {task['task_description']} (Status: {task['status']})" for
+            task in tasks])
+       update.message.reply_text(f"Your tasks:\n{response}")
+   else:
+       update.message.reply_text("No tasks found.")
+
+# Function to handle the /remove command
+def remove(update: Update, context: CallbackContext) -> None:
+   if update.message is None:
+       update.message.reply_text("Error: No message context available.")
+       return
+ 
+ 
+   try:
+       if len(context.args) != 1:
+           update.message.reply_text("Usage: /remove <task_id>")
+           return
+ 
+ 
+       task_id = int(context.args[0])
+       user_id = update.message.from_user.id
+       tasks = get_tasks(user_id)
+       task_found = False
+ 
+ 
+       for task in tasks:
+           if task['id'] == task_id:
+               tasks_db[user_id] = [t for t in tasks if t['id'] != task_id]
+               job_id = f"{user_id}_{task_id}"
+               try:
+                   scheduler.remove_job(job_id)
+               except JobLookupError:
+                   logging.warning(f"Job {job_id} not found for removal.")
+ 
+ 
+               task_found = True
+               break
+ 
+ 
+       if task_found:
+           update.message.reply_text(f"Task {task_id} removed successfully.")
+       else:
+           update.message.reply_text("Task not found.")
+   except (IndexError, ValueError) as e:
+       logging.error(f"Error in /remove command: {e}")
+       update.message.reply_text("Usage: /remove <task_id>")
+
+# Function to handle the /help command
+def help(update: Update, context: CallbackContext) -> None:
+   help_text = (
+       "Here are the commands you can use:\n"
+       "/start - Start running the bot and get a welcome message.\n"
+       "/add <date> <time> <description> - Add a new timestamped task.\n"
+       "/complete <task_id> - Mark a task as completed.\n"
+       "/view - View all your tasks.\n"
+       "/remove <task_id> - Remove a task.\n"
+   )
+   update.message.reply_text(help_text)
