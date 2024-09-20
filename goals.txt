@@ -1,0 +1,10 @@
+ Goals:
+Took a basic telegram-bot and started optimizing it based on these assumptions
+
+Assumptions:
+user data should be private 
+usage should be as easy as possible 
+there should also be a secretary option to directly communicate with the coders 
+data should be backed up encrypted deduplicated & loadable 
+data should delete itself following the german DSGVO convention
+there should be a kind of middleman function increasing security
