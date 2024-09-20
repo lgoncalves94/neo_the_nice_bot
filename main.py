@@ -7,13 +7,10 @@ from telegram import Update, Bot
 from telegram.ext import Updater, CommandHandler, CallbackContext
   
   
-# Setup logging
-  
 # Initialize scheduler
 scheduler = BackgroundScheduler()
 scheduler.start()
 
-
-
+# Start 
 if __name__ == '__main__':
    main()

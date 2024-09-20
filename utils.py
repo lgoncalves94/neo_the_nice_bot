@@ -1,4 +1,4 @@
-import logging
+from log_save import *
 from datetime import datetime
 import pytz
 from apscheduler.schedulers.background import BackgroundScheduler

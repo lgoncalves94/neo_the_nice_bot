@@ -1,3 +1,3 @@
-# Logged data shouldnt contain user answers 
+import logging
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
