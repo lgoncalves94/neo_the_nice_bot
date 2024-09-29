@@ -1,6 +1,6 @@
 from telegram.ext  import ApplicationBuilder
 from private import BOT_TOKEN
-from telegram.ext import ContextTypes, filters
+from telegram.ext import ContextTypes, filters, CommandHandler
 from commands import *
 from custom_classes import *
 import logging
@@ -20,7 +20,7 @@ if __name__ == '__main__':
     application.add_handler(MessageHandler(filters.Regex('^Set Reminder$'), set_reminder))
     application.add_handler(MessageHandler(filters.Regex('^Send suggestion to developer$'), send_suggestion))
     application.add_handler(MessageHandler(filters.Regex('^Ask about security$'), ask_security))
-
+    application.add_handler(CommandHandler("start", start_command))
     # Start polling
     logging.info('Bot is running')
     asyncio.run(application.run_polling())
