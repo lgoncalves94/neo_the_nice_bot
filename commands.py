@@ -13,9 +13,10 @@ async def start_command(update: Update, context: CallbackContext) -> None:
     greeting = random.choice(bot_greetings).format(first_name=user.first_name)
     # Create buttons for user options
     keyboard = [
-        ['Set Reminder'],                     # First row
-        ['Send suggestion to developer'],     # Second row
-        ['Ask about security'],               # Third row
+        ['Set Reminder'],
+        ['Send suggestion to developer'],
+        ['Ask about security'],
+        ['Get another Greeting']
     ]
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
     # Send the greeting with buttons
@@ -24,6 +25,9 @@ async def start_command(update: Update, context: CallbackContext) -> None:
 # Refactored handlers for button responses
 async def set_reminder(update: Update, context: CallbackContext) -> None:
     await update.message.reply_text("You chose to set a reminder. Please provide the details!")
+
+async def get_greeting(update: Update, context: CallbackContext) -> None:
+    await update.message.reply_text(random.choice(bot_greetings).format(first_name=update.message.from_user.first_name))
 
 async def send_suggestion(update: Update, context: CallbackContext) -> None:
     await update.message.reply_text("Please send your suggestion to the developer!")

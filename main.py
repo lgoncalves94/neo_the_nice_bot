@@ -20,6 +20,7 @@ if __name__ == '__main__':
     application.add_handler(MessageHandler(filters.Regex('^Set Reminder$'), set_reminder))
     application.add_handler(MessageHandler(filters.Regex('^Send suggestion to developer$'), send_suggestion))
     application.add_handler(MessageHandler(filters.Regex('^Ask about security$'), ask_security))
+    application.add_handler(MessageHandler(filters.Regex('^Get another Greeting$'), get_greeting))
     application.add_handler(CommandHandler("start", start_command))
     # Start polling
     logging.info('Bot is running')
