@@ -4,6 +4,7 @@ from telegram.ext import MessageHandler, CallbackContext
 from custom_classes import bot_greetings
 import asyncio
 
+
 # Refactored start_command function
 async def start_command(update: Update, context: CallbackContext) -> None:
     # Extract data
@@ -33,7 +34,19 @@ async def send_suggestion(update: Update, context: CallbackContext) -> None:
     await update.message.reply_text("Please send your suggestion to the developer!")
 
 async def ask_security(update: Update, context: CallbackContext) -> None:
-    await update.message.reply_text("What security concerns do you have?")
+    await update.message.reply_text("""
+Yes, your data is securely encrypted!
+
+In our database, we use *Fernet* encryption, which applies a secure symmetric key to protect your data.
+
+We also employ a multi-level key management system, where a primary key encrypts the data
+and derived keys are used for additional security.
+
+And these keys are split up among different strongly secured cloud-key providers.
+
+This means that even if one key is compromised, your sensitive information remains protected.
+
+Your privacy and security are our top priorities!""")
 
 
 
