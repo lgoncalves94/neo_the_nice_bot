@@ -34,9 +34,6 @@ Logging and Error Handling
     Integrated logging to monitor bot activities and any errors that occur during execution.
 
 Next Steps
-
-0. Stop the natural telegram /start command button and change it into neo 
- 
 1. Natural Language Processing (NLP) for Date Extraction
 
     Goal: Enable the bot to extract reminder dates from natural language input without requiring a specific format.
@@ -51,7 +48,8 @@ Next Steps
         Research encryption libraries such as cryptography.
         Create methods to encrypt and decrypt user responses securely.
 
-3. Save Reminder Dates in PostgreSQL Database
+3.0 Code Reminder Function
+3.1 Save Reminder Dates in PostgreSQL Database
 
     Goal: Persist reminder data to ensure that it is retrievable even if the bot shuts down.
     Action Items:
