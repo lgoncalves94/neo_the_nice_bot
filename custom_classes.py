@@ -2,15 +2,6 @@ from telegram import Update
 from telegram.ext import MessageHandler, filters, CallbackContext
 import asyncio
 
-
-
-# Listens for neo commands
-class NeoCommandHandler(MessageHandler):
-    def __init__(self,command,callback):
-        command_regex = fr'^neo\s+{command}\b.*'
-        super().__init__(filters.Regex(command_regex), callback)
-
-
 # 104 Greetings
 bot_greetings = [
     "Ni hao, {first_name}! This was Chinese! Did you know China is home to the world's oldest continuous written language? Let's make today unforgettable!",  # Chinese
