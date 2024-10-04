@@ -32,7 +32,7 @@ async def get_greeting(update: Update, context: CallbackContext) -> None:
     await update.message.reply_text(random.choice(bot_greetings).format(first_name=update.message.from_user.first_name))
 
 async def send_suggestion(update: Update, context: CallbackContext) -> None:
-    await update.message.reply_text("Please enter your suggestion in written from and if you would like us to get back to you also an e-mail address:")
+    await update.message.reply_text("Please enter your suggestion & if you would like us to get back to you also an e-mail address:")
     # Set a flag indicating we are awaiting the user's suggestion
     context.user_data['awaiting_suggestion'] = True
 

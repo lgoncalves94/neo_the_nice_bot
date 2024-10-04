@@ -10,7 +10,6 @@ Completed Features
         Handlers are set up for various commands and button responses.
 
     Command Handling
-        Implemented a custom command handler NeoCommandHandler to interpret commands prefixed with "neo".
         The bot responds to the /start command with a personalized greeting and options for user interaction.
 
     User Interaction
